@@ -1,0 +1,16 @@
+services:
+  - type: web
+    name: tds-geniesolver
+    env: python
+    branch: main
+    # This installs all the libraries listed in your instructions, then installs the browser for Playwright
+    buildCommand: "pip install playwright beautifulsoup4 langgraph langchain langchain-community langchain-google-genai google-genai jsonpatch python-dotenv pandas fastapi uvicorn requests pillow pytesseract speechrecognition pydub geopy scikit-learn matplotlib pypdf2 ffmpeg-python numpy networkx fuzzywuzzy python-levenshtein duckdb pypdf scipy haversine && playwright install chromium"
+    # This starts the app on the port Render assigns
+    startCommand: "uvicorn main:app --host 0.0.0.0 --port $PORT"
+    envVars:
+      - key: GOOGLE_API_KEY
+        sync: false
+      - key: AIPROXY_TOKEN
+        sync: false
+      - key: SECRET_KEY
+        sync: false
